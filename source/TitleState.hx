@@ -154,7 +154,7 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
-		Conductor.changeBPM(102);
+		Conductor.changeBPM(138);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -429,10 +429,10 @@ class TitleState extends MusicBeatState
 			// credTextShit.text = 'Shoutouts Tom Fulp';
 			// credTextShit.screenCenter();
 			case 9:
-				createCoolText([curWacky[0]]);
+				createCoolText(['Art and Animation', 'by']);
 			// credTextShit.visible = true;
 			case 11:
-				addMoreText(curWacky[1]);
+				addMoreText('pizzapancakess');
 			// credTextShit.text += '\nlmao';
 			case 12:
 				deleteCoolText();
@@ -440,15 +440,47 @@ class TitleState extends MusicBeatState
 			// credTextShit.text = "Friday";
 			// credTextShit.screenCenter();
 			case 13:
-				addMoreText('VS');
+				createCoolText(['Music and programming', 'by']);
 			// credTextShit.visible = true;
 			case 14:
-				addMoreText('Door to door');
+				addMoreText('aurazona');
 			// credTextShit.text += '\nNight';
 			case 15:
-				addMoreText('door salesman'); // credTextShit.text += '\nFunkin';
-
+			deleteCoolText();
+			// credTextShit.text += '\nFunkin';
 			case 16:
+				createCoolText(['Extra love', 'to']);
+			case 17:
+				addMoreText('the DSW community');
+			case 18:
+				addMoreText('Hatsune Miku');
+			case 19:
+				addMoreText('Doors');
+			case 20:
+				addMoreText('You');
+			case 21:
+				deleteCoolText();
+			case 22:
+				createCoolText([curWacky[0]]);
+			case 23:
+				addMoreText(curWacky[1]);
+			case 24:
+				deleteCoolText();
+			case 25:
+				createCoolText(['buy']);
+			case 26:
+				addMoreText('his');
+			case 27:
+				addMoreText('doors');
+			case 28:
+				deleteCoolText();
+			case 29:
+				addMoreText('VS');
+			case 30:
+				addMoreText('Door to door');
+			case 31:
+				addMoreText('door salesman');
+			case 32:
 				skipIntro();
 		}
 	}

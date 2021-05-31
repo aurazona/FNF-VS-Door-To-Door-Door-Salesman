@@ -688,6 +688,10 @@ class PlayState extends MusicBeatState
 	
 						add(stageCurtains);
 				}
+			case 'house':
+			{
+				//nothing here yet lmaooooo
+			}
 			default:
 			{
 					defaultCamZoom = 0.9;
@@ -1025,6 +1029,12 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
 				case 'thorns':
+					schoolIntro(doof);
+				case 'doorcember':
+					schoolIntro(doof);
+				case 'heavens door':
+					schoolIntro(doof);
+				case 'ajar':
 					schoolIntro(doof);
 				default:
 					startCountdown();
