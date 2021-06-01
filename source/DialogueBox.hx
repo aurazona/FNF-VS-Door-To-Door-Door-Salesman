@@ -184,7 +184,7 @@ class DialogueBox extends FlxSpriteGroup
 			dropText.color = FlxColor.BLACK;
 		}
 		//ME TOO NINJA
-		if (Playstate.SONG.song.toLowerCase() == 'doorcember' | Playstate.SONG.song.toLowerCase() == 'heavens door' | Playstate.SONG.song.toLowerCase() == 'ajar')
+		if (PlayState.SONG.song.toLowerCase() == 'doorcember' || PlayState.SONG.song.toLowerCase() == 'heavens door' || PlayState.SONG.song.toLowerCase() == 'ajar')
 		{
 			swagDialogue.color = FlxColor.WHITE;
 		}
@@ -220,7 +220,10 @@ class DialogueBox extends FlxSpriteGroup
 
 					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns')
 						FlxG.sound.music.fadeOut(2.2, 0);
-
+					if (PlayState.SONG.song.toLowerCase() == 'doorcember' || PlayState.SONG.song.toLowerCase() == 'heavens door' || PlayState.SONG.song.toLowerCase() == 'ajar')
+					{
+						FlxG.sound.music.fadeOut(2.2, 0);
+					}
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
 					{
 						box.alpha -= 1 / 5;

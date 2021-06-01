@@ -335,6 +335,12 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
 			case 'thorns':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
+			case 'doorcember':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('doorcember/doorcemberDialogue'));
+			case 'heavens door':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('heavens door/heavens doorDialogue'));
+			case 'ajar':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('ajar/ajarDialogue'));
 		}
 
 		switch(SONG.stage)
@@ -690,7 +696,41 @@ class PlayState extends MusicBeatState
 				}
 			case 'house':
 			{
-				//nothing here yet lmaooooo
+				//i spent like an hour and 45 minutes adjusting this shit because flixel positioning sucks FAT DICK
+				defaultCamZoom = 0.9;
+				curStage = 'house';
+
+				//reagan and bush, reagan and bush, these are the words that will grant me the kush.
+				var bush:FlxSprite = new FlxSprite(-450, 100).loadGraphic(Paths.image('houseBush1', 'shared'));
+				bush.antialiasing = true;
+				//bush.setGraphicSize(2594, 955);
+				//bush.scrollFactor.set(0, 0);
+				bush.active = false;
+				add(bush);
+
+				//i'm only doing these comments to keep me sane because FUCK BACKGROUND IMPLEMENTATION AAAAAAAAAAAAAAAAAAAAA
+				var porch:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('housePorch2', 'shared'));
+				//porch.setGraphicSize(2594, 955);
+				porch.antialiasing = true;
+				//porch.scrollFactor.set(0, 0);
+				porch.active = false;
+				add(porch);
+
+				//let the bodies hit the floor
+				var floor:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('houseFloor3', 'shared'));
+				//floor.setGraphicSize(2594, 955);
+				floor.antialiasing = true;
+				//floor.scrollFactor.set(0, 0);
+				floor.active = false;
+				add(floor);
+
+				//open the door, get on the floor, everybody do the dinosaur
+				var door:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('houseDoor4', 'shared'));
+				//door.setGraphicSize(2594, 955);
+				door.antialiasing = true;
+				//door.scrollFactor.set(0, 0);
+				door.active = false;
+				add(door);
 			}
 			default:
 			{
@@ -777,6 +817,10 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'bastard':
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 400);
+			case 'bastardns':
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 400);
 		}
 
 
@@ -821,8 +865,8 @@ class PlayState extends MusicBeatState
 				gf.x += 180;
 				gf.y += 300;
 		}
-
-		add(gf);
+		if (curStage != 'house')
+			add(gf);
 
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
@@ -2051,6 +2095,10 @@ class PlayState extends MusicBeatState
 					case 'senpai-angry':
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
+					case 'bastard':
+						camFollow.y = dad.getMidpoint().y + 25;
+					case 'bastardns':
+						camFollow.y = dad.getMidpoint().y + 25;
 				}
 
 				if (dad.curCharacter == 'mom')
