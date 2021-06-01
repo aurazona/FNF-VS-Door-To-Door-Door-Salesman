@@ -56,7 +56,7 @@ class StoryMenuState extends MusicBeatState
 		"MOMMY MUST MURDER",
 		"RED SNOW",
 		"Hating Simulator ft. Moawling",
-		"Lord of Doors"
+		"The Deal"
 	];
 
 	var txtWeekTitle:FlxText;

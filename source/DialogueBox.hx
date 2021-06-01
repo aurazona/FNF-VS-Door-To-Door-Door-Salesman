@@ -46,6 +46,15 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'doorcember':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'heavens door':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'ajar':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -89,17 +98,17 @@ class DialogueBox extends FlxSpriteGroup
 				add(face);
 			case 'doorcember':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 			case 'heavens door':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 			case 'ajar':
 				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 		}
@@ -173,6 +182,11 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.color = FlxColor.BLACK;
 			swagDialogue.color = FlxColor.WHITE;
 			dropText.color = FlxColor.BLACK;
+		}
+		//ME TOO NINJA
+		if (Playstate.SONG.song.toLowerCase() == 'doorcember' | Playstate.SONG.song.toLowerCase() == 'heavens door' | Playstate.SONG.song.toLowerCase() == 'ajar')
+		{
+			swagDialogue.color = FlxColor.WHITE;
 		}
 
 		dropText.text = swagDialogue.text;

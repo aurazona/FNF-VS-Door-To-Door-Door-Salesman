@@ -495,6 +495,22 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", -30, -27);
 
 				playAnim('idle');
+
+			case 'bastard':
+				frames = Paths.getSparrowAtlas('characters/scam_salesman');
+				animation.addByPrefix('idle', 'scam idle', 24, false);
+				animation.addByPrefix('singUP', 'scam up', 24, false);
+				animation.addByPrefix('singDOWN', 'scam down', 24, false);
+				animation.addByPrefix('singLEFT', 'scam left', 24, false);
+				animation.addByPrefix('singRIGHT', 'scam right', 24, false);
+
+				addOffset('idle', 0, 100);
+				addOffset('singUP', 0, 100);
+				addOffset('singRIGHT', 0, 100);
+				addOffset('singLEFT', 0, 100);
+				addOffset('singDOWN', 0, 100);
+
+				playAnim('idle');
 		}
 
 		dance();
