@@ -409,12 +409,12 @@ class TitleState extends MusicBeatState
 			// credTextShit.screenCenter();
 			case 5:
 				if (Main.watermarks)
-					createCoolText(['Door Engine', 'by']);
+					createCoolText(['Kade Engine', 'by']);
 				else
 					createCoolText(['In Partnership', 'with']);
 			case 7:
 				if (Main.watermarks)
-					addMoreText('DoorDeveloper');
+					addMoreText('KadeDeveloper');
 				else
 				{
 					addMoreText('Newdoors');
@@ -467,11 +467,11 @@ class TitleState extends MusicBeatState
 			case 24:
 				deleteCoolText();
 			case 25:
-				createCoolText(['buy']);
+				createCoolText(['Friday']);
 			case 26:
-				addMoreText('his');
+				addMoreText('Night');
 			case 27:
-				addMoreText('doors');
+				addMoreText('Funkin');
 			case 28:
 				deleteCoolText();
 			case 29:
