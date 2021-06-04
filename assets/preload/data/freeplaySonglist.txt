@@ -17,6 +17,6 @@ Winter Horrorland:monster-christmas:5
 Senpai:senpai:6
 Roses:senpai:6
 Thorns:spirit:6
-Doorcember:dad:1
-Heavens Door:dad:1
-Ajar:dad:1
+Doorcember:bastard:1
+Heavens Door:bastardns:1
+Ajar:bastardns:1

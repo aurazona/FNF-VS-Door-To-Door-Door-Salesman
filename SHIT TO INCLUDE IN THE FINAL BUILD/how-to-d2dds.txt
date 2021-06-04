@@ -1,9 +1,0 @@
-Ah, we got us a musician! You love to see it.
-
-So, here's how to make Door to Door Door Salesman's voice in FL studio.
-
-You're gonna want to make a GMS channel (click that lil plus icon at the button of the channel rack and find your way to GMS, it should be under Synth Classic) and then choose the 'Talking Bass' program. After that, turn off the reverb filter (click that RVRB button near the top right, and click that lit up GLUE button to turn it off).
-
-Congrats, you've got the D2DDS voice! 
-
-Now, you might notice it's a lil fast and doesn't really hold long notes. This can be fixed by changing up that LFO slider underneath the program button. The higher the slider is, the slower his 'voice' will be. I'd be a bit careful about cranking that thing way up to the top though, it starts to get a bit distorted.
