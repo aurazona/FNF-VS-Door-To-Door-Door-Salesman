@@ -13,16 +13,21 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
+	var dadTimerFinished:Bool = false;
+	var dadCamLock:Bool = false;
+	public static var daBf:String = '';
 
 	public function new(x:Float, y:Float)
 	{
 		var daStage = PlayState.curStage;
-		var daBf:String = '';
+		daBf = '';
 		switch (PlayState.SONG.player1)
 		{
 			case 'bf-pixel':
 				stageSuffix = '-pixel';
 				daBf = 'bf-pixel-dead';
+			case 'bf-dad':
+				daBf = 'bf-dad';
 			default:
 				daBf = 'bf';
 		}
@@ -68,14 +73,31 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.loadRep = false;
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
+		if (daBf != 'bf-dad' && bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
+		if (daBf != 'bf-dad' && bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+		}
+
+		if (daBf == 'bf-dad' && bf.animation.curAnim.name == 'firstDeath' && dadCamLock == false)
+		{
+			new FlxTimer().start(0.5, function(e:FlxTimer)
+				{
+					FlxG.camera.follow(camFollow, LOCKON, 0.01);
+				});
+		}
+
+		if (daBf == 'bf-dad' && bf.animation.curAnim.name == 'firstDeath' && dadTimerFinished == false)
+		{
+			new FlxTimer().start(2.75, function(e:FlxTimer)
+			{
+				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+				dadTimerFinished = true;
+			});
 		}
 
 		if (FlxG.sound.music.playing)

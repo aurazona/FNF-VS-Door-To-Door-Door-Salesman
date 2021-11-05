@@ -55,6 +55,15 @@ class DialogueBox extends FlxSpriteGroup
 			case 'ajar':
 				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'doorman':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'doorkicker':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'stage exit':
+				FlxG.sound.playMusic(Paths.music('scammersSerenade'));
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -111,6 +120,21 @@ class DialogueBox extends FlxSpriteGroup
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
+			case 'doorman':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
+				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
+			case 'doorkicker':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
+				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
+			case 'stage exit':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
+				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
 		}
 
 		this.dialogueList = dialogueList;
@@ -139,7 +163,7 @@ class DialogueBox extends FlxSpriteGroup
 			portraitRight.visible = false;
 		}
 
-		if (PlayState.SONG.song.toLowerCase() == 'doorcember' || PlayState.SONG.song.toLowerCase() == 'heavens door' || PlayState.SONG.song.toLowerCase() == 'ajar')
+		if (PlayState.SONG.song.toLowerCase() == 'doorcember' || PlayState.SONG.song.toLowerCase() == 'heavens door' || PlayState.SONG.song.toLowerCase() == 'ajar') //WEEK 1
 		{
 			portraitLeft = new FlxSprite(150, 200);
 			portraitLeft.frames = Paths.getSparrowAtlas('weeb/scam_portraits', 'shared');
@@ -158,6 +182,36 @@ class DialogueBox extends FlxSpriteGroup
 			portraitRight = new FlxSprite(800, 200);
 			portraitRight.frames = Paths.getSparrowAtlas('weeb/bf_portrait', 'shared');
 			portraitRight.animation.addByPrefix('enter', 'BF', 24, false);
+			//portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+			//portraitRight.updateHitbox();
+			//portraitRight.scrollFactor.set();
+			add(portraitRight);
+			portraitRight.visible = false;
+		}
+
+		if (PlayState.SONG.song.toLowerCase() == 'doorman' || PlayState.SONG.song.toLowerCase() == 'doorkicker' || PlayState.SONG.song.toLowerCase() == 'stage exit') //WEEK 2
+		{
+			portraitLeft = new FlxSprite(150, 200);
+			portraitLeft.frames = Paths.getSparrowAtlas('weeb/scam_portraits', 'shared');
+			//portraitLeft.animation.addByPrefix('enter', 'start', 24, false);
+			portraitLeft.animation.addByPrefix('nervous', 'nervous', 24, false);
+			portraitLeft.animation.addByPrefix('normal', 'normal', 24, false);
+			portraitLeft.animation.addByPrefix('smug', 'smug', 24, false);
+			portraitLeft.animation.addByPrefix('shocked', 'shocked', 24, false);
+			portraitLeft.animation.addByPrefix('yeet', 'yeet', 24, false);
+			//portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+			//portraitLeft.updateHitbox();
+			//portraitLeft.scrollFactor.set();
+			add(portraitLeft);
+			portraitLeft.visible = false;
+	
+			portraitRight = new FlxSprite(800, 200);
+			portraitRight.frames = Paths.getSparrowAtlas('weeb/dd_portraits', 'shared');
+			portraitRight.animation.addByPrefix('dd anger', 'dd anger', 24, false);
+			portraitRight.animation.addByPrefix('dd down', 'dd down', 24, false);
+			portraitRight.animation.addByPrefix('dd left', 'dd left', 24, false);
+			portraitRight.animation.addByPrefix('dd right', 'dd right', 24, false);
+			portraitRight.animation.addByPrefix('dd up', 'dd up', 24, false);
 			//portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
 			//portraitRight.updateHitbox();
 			//portraitRight.scrollFactor.set();
@@ -217,6 +271,11 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			swagDialogue.color = FlxColor.WHITE;
 		}
+		//ME TOO AGAIN NINJA
+		if (PlayState.SONG.song.toLowerCase() == 'doorman' || PlayState.SONG.song.toLowerCase() == 'doorkicker' || PlayState.SONG.song.toLowerCase() == 'stage exit')
+		{
+			swagDialogue.color = FlxColor.WHITE;
+		}
 
 		dropText.text = swagDialogue.text;
 
@@ -250,6 +309,10 @@ class DialogueBox extends FlxSpriteGroup
 					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns')
 						FlxG.sound.music.fadeOut(2.2, 0);
 					if (PlayState.SONG.song.toLowerCase() == 'doorcember' || PlayState.SONG.song.toLowerCase() == 'heavens door' || PlayState.SONG.song.toLowerCase() == 'ajar')
+					{
+						FlxG.sound.music.fadeOut(2.2, 0);
+					}
+					if (PlayState.SONG.song.toLowerCase() == 'doorman' || PlayState.SONG.song.toLowerCase() == 'doorkicker' || PlayState.SONG.song.toLowerCase() == 'stage exit')
 					{
 						FlxG.sound.music.fadeOut(2.2, 0);
 					}
@@ -344,6 +407,44 @@ class DialogueBox extends FlxSpriteGroup
 					portraitLeft.visible = true;	
 				}
 				portraitLeft.animation.play('yeet');
+			case 'dadmad':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
+				portraitRight.animation.play('dd anger');
+			case 'daddown':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
+				portraitRight.animation.play('dd down');
+			case 'dadleft':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
+				portraitRight.animation.play('dd left');
+			case 'dadright':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
+				portraitRight.animation.play('dd right');
+			case 'dadup':
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
+				portraitRight.animation.play('dd up');
+			case 'hide':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
 		}
 	}
 

@@ -24,39 +24,45 @@ class StoryMenuState extends MusicBeatState
 	var scoreText:FlxText;
 
 	var weekData:Array<Dynamic> = [
-		['Tutorial'],
-		['Bopeebo', 'Fresh', 'Dad Battle'],
-		['Spookeez', 'South', "Monster"],
-		['Pico', 'Philly Nice', "Blammed"],
-		['Satin Panties', "High", "Milf"],
-		['Cocoa', 'Eggnog', 'Winter Horrorland'],
-		['Senpai', 'Roses', 'Thorns'],
-		['Doorcember', 'Heavens Door', 'Ajar']
+		//['Tutorial'],
+		//['Bopeebo', 'Fresh', 'Dad Battle'],
+		//['Spookeez', 'South', "Monster"],
+		//['Pico', 'Philly Nice', "Blammed"],
+		//['Satin Panties', "High", "Milf"],
+		//['Cocoa', 'Eggnog', 'Winter Horrorland'],
+		//['Senpai', 'Roses', 'Thorns'],
+		['Doorcember', 'Heavens Door', 'Ajar'],
+		['Doorman', 'Doorkicker', 'Stage Exit']
+		//['Doorkicker'] //CUTSCENE TEST WEEK
 	];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [/*true, true, true, true, true, true, true,*/ true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
-		['', 'bf', 'gf'],
-		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf'],
-		['bastard', 'bf', '']
+		//['', 'bf', 'gf'],
+		//['dad', 'bf', 'gf'],
+		//['spooky', 'bf', 'gf'],
+		//['pico', 'bf', 'gf'],
+		//['mom', 'bf', 'gf'],
+		//['parents-christmas', 'bf', 'gf'],
+		//['senpai', 'bf', 'gf'],
+		['', 'week1', ''],
+		['', 'week2', '']
+		//['', 'week1', '']
 	];
 
 	var weekNames:Array<String> = [
-		"",
-		"Daddy Dearest",
-		"Spooky Month",
-		"PICO",
-		"MOMMY MUST MURDER",
-		"RED SNOW",
-		"Hating Simulator ft. Moawling",
-		"The Deal"
+		//"",
+		//"Daddy Dearest",
+		//"Spooky Month",
+		//"PICO",
+		//"MOMMY MUST MURDER",
+		//"RED SNOW",
+		//"Hating Simulator ft. Moawling",
+		"The Deal",
+		"Door Dearest"
+		//"CUTSCENE TEST WEEK"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -280,7 +286,7 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].animation.play('bfConfirm');
+				//grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
 

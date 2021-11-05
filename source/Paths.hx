@@ -110,6 +110,11 @@ class Paths
 		return getPath('images/$key.png', IMAGE, library);
 	}
 
+	inline static public function imageJpg(key:String, ?library:String)
+	{
+		return getPath('images/$key.jpg', IMAGE, library);
+	}
+
 	inline static public function font(key:String)
 	{
 		return 'assets/fonts/$key';

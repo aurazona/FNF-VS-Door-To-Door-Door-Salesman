@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="falling door.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="falling door0000" x="0" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0001" x="0" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0002" x="150" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0003" x="150" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0004" x="300" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0005" x="300" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0006" x="450" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0007" x="450" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0008" x="600" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0009" x="600" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0010" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0011" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0012" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0013" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0014" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0015" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0016" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0017" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0018" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0019" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0020" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0021" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0022" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0023" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0024" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0025" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0026" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0027" x="750" y="0" width="150" height="800"/>
+	<SubTexture name="falling door0028" x="750" y="0" width="150" height="800"/>
+</TextureAtlas>

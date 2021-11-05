@@ -13,6 +13,10 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 
+#if !mobile
+//addChild(new FPS(10, 3, 0xFFFFFF));
+#end
+
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
@@ -116,4 +120,7 @@ class Main extends Sprite
 	{
 		return fpsCounter.currentFPS;
 	}
+
+	//addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, updateframerate, drawframerate, skipSplash, startFullscreen));
+
 }

@@ -10,6 +10,8 @@ using StringTools;
 class Boyfriend extends Character
 {
 	public var stunned:Bool = false;
+	var dadTimerFinished:Bool = false;
+	var curBf:String = GameOverSubstate.daBf;
 
 	public function new(x:Float, y:Float, ?char:String = 'bf')
 	{
@@ -36,6 +38,15 @@ class Boyfriend extends Character
 			{
 				playAnim('deathLoop');
 			}
+
+			if (curBf == 'bf-dad' && animation.curAnim.name == 'firstDeath' && dadTimerFinished == false)
+				{
+					new FlxTimer().start(2.75, function(e:FlxTimer)
+					{
+						playAnim('deathLoop');
+						dadTimerFinished = true;
+					});
+				}
 		}
 
 		super.update(elapsed);

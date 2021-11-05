@@ -21,7 +21,7 @@ class AnimationDebug extends FlxState
 	var dumbTexts:FlxTypedGroup<FlxText>;
 	var animList:Array<String> = [];
 	var curAnim:Int = 0;
-	var isDad:Bool = true;
+	var isDad:Bool = false;
 	var daAnim:String = 'spooky';
 	var camFollow:FlxObject;
 
@@ -54,13 +54,13 @@ class AnimationDebug extends FlxState
 		}
 		else
 		{
-			bf = new Boyfriend(0, 0);
+			bf = new Boyfriend(0, 0, 'bf-dad');
 			bf.screenCenter();
 			bf.debugMode = true;
 			add(bf);
 
 			char = bf;
-			bf.flipX = false;
+			bf.flipX = true;
 		}
 
 		dumbTexts = new FlxTypedGroup<FlxText>();

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="campaignUI.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="UIweek10000" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10001" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10002" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10003" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10004" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10005" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10006" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10007" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10008" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10009" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10010" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10011" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10012" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek10013" x="0" y="0" width="1280" height="400"/>
+	<SubTexture name="UIweek20000" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20001" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20002" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20003" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20004" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20005" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20006" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20007" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20008" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20009" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20010" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20011" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20012" x="0" y="400" width="1280" height="400"/>
+	<SubTexture name="UIweek20013" x="0" y="400" width="1280" height="400"/>
+</TextureAtlas>

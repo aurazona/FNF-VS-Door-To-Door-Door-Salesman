@@ -163,10 +163,12 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		logoBl = new FlxSprite(-150, -100);
+		logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.setGraphicSize(0, 500);
+		logoBl.updateHitbox();
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
@@ -304,6 +306,12 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
+			#if html5 //hehe boi
+			FlxG.sound.pause();
+			FlxG.switchState(new OutdatedSubState());
+			#end
+			//hey if you're looking at this to comment it out or delete it for your html5 build, not cool man. At least credit us, okay?
+
 			MainMenuState.firstStart = true;
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
@@ -311,7 +319,7 @@ class TitleState extends MusicBeatState
 				// Get current version of Kade Engine
 
 				//var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
-				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/patchnotes/version.downloadMe");
+				var http = new haxe.Http("https://raw.githubusercontent.com/aurazona/FNF-VS-Door-To-Door-Door-Salesman/master/version.downloadMe");
 				var returnedData:Array<String> = [];
 				
 				http.onData = function (data:String)
@@ -325,6 +333,7 @@ class TitleState extends MusicBeatState
 						OutdatedSubState.currChanges = returnedData[1];
 						FlxG.switchState(new OutdatedSubState());
 					}
+
 					else
 					{
 						FlxG.switchState(new MainMenuState());
@@ -338,7 +347,9 @@ class TitleState extends MusicBeatState
 				
 				http.request();
 			});
-			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+			// FlxG.sound.play(Paths.music('titleShoot'), 0.7); */
+
+			
 		}
 
 		if (pressedEnter && !skippedIntro && initialized)

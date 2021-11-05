@@ -50,7 +50,6 @@ class Character extends FlxSprite
 				addOffset('sad', -2, -2);
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
-
 				addOffset("singUP", 0, 4);
 				addOffset("singRIGHT", 0, -20);
 				addOffset("singLEFT", 0, -19);
@@ -137,6 +136,37 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", 0, 27);
 				addOffset("singLEFT", -10, 10);
 				addOffset("singDOWN", 0, -30);
+
+				playAnim('idle');
+			case 'bf-dad':
+				tex = Paths.getSparrowAtlas('characters/DDPlayer');
+				frames = tex;
+				animation.addByPrefix('idle', 'Dad idle dance', 30);
+				animation.addByPrefix('singUP', 'Dad Sing note UP', 24);
+				animation.addByPrefix('singRIGHT', 'dad sing note RIGHT', 24);
+				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
+				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+				animation.addByPrefix('singUPmiss', 'Dad Sing note miss UP', 24);
+				animation.addByPrefix('singRIGHTmiss', 'dad sing note miss RIGHT', 24);
+				animation.addByPrefix('singDOWNmiss', 'Dad Sing Note miss DOWN', 24);
+				animation.addByPrefix('singLEFTmiss', 'Dad Sing Note miss LEFT', 24);
+
+				animation.addByPrefix('firstDeath', 'Dad dies', 24);
+				animation.addByPrefix('deathLoop', 'Dad dead0', 24);
+				animation.addByPrefix('deathConfirm', 'Dad dead confirm', 24);
+
+				addOffset('idle');
+				addOffset("singUP", 8, 46);
+				addOffset("singRIGHT", -33, 10);
+				addOffset("singLEFT", 50, 27);
+				addOffset("singDOWN", 50, -34);
+				addOffset('singUPmiss', 0, 51);
+				addOffset('singDOWNmiss', 46, -27);
+				addOffset('singRIGHTmiss', -28, 8);
+				addOffset('singLEFTmiss', 48, 26);
+				addOffset('firstDeath');
+				addOffset('deathLoop');
+				addOffset('deathConfirm');
 
 				playAnim('idle');
 			case 'spooky':
@@ -503,12 +533,14 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'scam down', 24, false);
 				animation.addByPrefix('singLEFT', 'scam left', 24, false);
 				animation.addByPrefix('singRIGHT', 'scam right', 24, false);
+				animation.addByPrefix('cutscene button', 'scam button', 24, false);
 
 				addOffset('idle', 0, 100);
 				addOffset('singUP', 0, 100);
 				addOffset('singRIGHT', 0, 100);
 				addOffset('singLEFT', 0, 100);
 				addOffset('singDOWN', 0, 100);
+				addOffset('cutscene button', 0, 100);
 
 				playAnim('idle');
 
@@ -531,7 +563,7 @@ class Character extends FlxSprite
 
 		dance();
 
-		if (isPlayer)
+		if (isPlayer) //WHY THE FUCK DOES THIS KEEP BREAKING EVERYTHING
 		{
 			flipX = !flipX;
 
@@ -551,7 +583,7 @@ class Character extends FlxSprite
 					animation.getByName('singLEFTmiss').frames = oldMiss;
 				}
 			}
-		}
+		} 
 	}
 
 	override function update(elapsed:Float)
@@ -565,12 +597,13 @@ class Character extends FlxSprite
 
 			var dadVar:Float = 4;
 
-			if (curCharacter == 'dad')
-				dadVar = 6.1;
+			//if (curCharacter == 'dad')
+				//dadVar = 6.1;
 			if (holdTimer >= Conductor.stepCrochet * dadVar * 0.001)
 			{
 				dance();
 				holdTimer = 0;
+				//trace("character.hx fuckin up the holds");
 			}
 		}
 

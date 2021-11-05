@@ -28,11 +28,13 @@ class OutdatedSubState extends MusicBeatState
 	override function create()
 	{
 		super.create();
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('week54prototype', 'shared'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('pov_ur_fucked', 'shared'));
 		bg.scale.x *= 1.55;
 		bg.scale.y *= 1.55;
 		bg.screenCenter();
 		add(bg);
+
+		FlxG.sound.playMusic(Paths.music('fuckingWebPorts'), 0.7);
 		
 		var kadeLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('KadeEngineLogo'));
 		kadeLogo.scale.y = 0.3;
@@ -43,13 +45,13 @@ class OutdatedSubState extends MusicBeatState
 		add(kadeLogo);
 		
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Your Kade Engine is outdated!\nYou are on "
-			+ MainMenuState.kadeEngineVer
-			+ "\nwhile the most recent version is " + needVer + "."
-			+ "\n\nWhat's new:\n\n"
-			+ currChanges
-			+ "\n& more changes and bugfixes in the full changelog"
-			+ "\n\nPress Space to view the full changelog and update\nor ESCAPE to ignore this",
+			"You appear to be playing on a website!"
+			+ "\nThat's cool and all if you can't download, \n but it doesn't exactly support the creators."
+			+ "\n\nWhy?\n\n"
+			+ "\nThat's because this mod has been taken and used for profit, which isn't cool considering it's free."
+			+ "\n\nIf you want the best experience, please consider\nDownloading this from the GameBanana site!"
+			+ "\n\nPlease press ENTER to go to the mod's GameBanana page!"
+			+ "\nAfter you've done this, you'll be taken to the main menu.", //yeah fuck you we're evil lol
 			32);
 		
 		txt.setFormat("VCR OSD Mono", 32, FlxColor.fromRGB(200, 200, 200), CENTER);
@@ -86,13 +88,15 @@ class OutdatedSubState extends MusicBeatState
 	{
 		if (controls.ACCEPT)
 		{
-			FlxG.openURL("https://kadedev.github.io/Kade-Engine/changelogs/changelog-" + needVer);
-		}
-		if (controls.BACK)
-		{
+			FlxG.openURL("https://gamebanana.com/mods/292335");
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
+		/*if (controls.BACK)
+		{
+			leftState = true;
+			FlxG.switchState(new MainMenuState());
+		} */
 		super.update(elapsed);
 	}
 }

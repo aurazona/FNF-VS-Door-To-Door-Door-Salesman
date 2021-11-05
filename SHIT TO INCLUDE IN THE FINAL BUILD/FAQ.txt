@@ -1,0 +1,22 @@
+PLEASE READ THIS TOO!!!! IF YOU ASK SOMETHING THAT'S ALREADY HERE I WILL CALL YOU A STINKY NERD AND TELL YOU TO READ THIS!!!
+
+Aura here, time for some frequently asked questions.
+
+Q: Why sonic music?
+
+A: Short answer: I'm lazy and I am not a musician. 
+
+Long answer: I actually made Ajar before the mod was even an idea. I was fucking around with FL studio, adding BF's voice into stuff and thought 'hey, this actually sounds kinda good.' I ran it by pizzapancakess_, she said 'wouldn't it be funny if we made a mod' and we ended up here. I decided to continue remixing sonic music as I have a shitton of sonic MIDIs on my computer (don't ask why) and it kinda just fit D2DDS's vibe.
+
+Q: Why no zip???? make a zip!!!!
+
+A: Not exactly a question, but look up 7zip and get back to me.
+
+Q: How did you do [insert feature here] or [insert other feature here]?
+
+A: We're open source, go find out for yourself!
+
+Q: Update when????
+
+A: Unless it's a bug fix or there's overwhelming demand for a new week, never™.
+

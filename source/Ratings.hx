@@ -48,37 +48,37 @@ class Ratings
                 switch(i)
                 {
                     case 0:
-                        ranking += " AAAAA";
+                        ranking += " AAAAA - HOW";
                     case 1:
-                        ranking += " AAAA:";
+                        ranking += " AAAA: - YOU GOTTA BE BOTTING";
                     case 2:
-                        ranking += " AAAA.";
+                        ranking += " AAAA. - JESUS";
                     case 3:
-                        ranking += " AAAA";
+                        ranking += " AAAA - WHAT";
                     case 4:
-                        ranking += " AAA:";
+                        ranking += " AAA: - OK CALM DOWN";
                     case 5:
-                        ranking += " AAA.";
+                        ranking += " AAA. - TRYHARD MOMENT";
                     case 6:
-                        ranking += " AAA";
+                        ranking += " AAA - BIG BOY HOURS";
                     case 7:
-                        ranking += " AA:";
+                        ranking += " AA: - NICE!";
                     case 8:
-                        ranking += " AA.";
+                        ranking += " AA. - BRETTY GUD";
                     case 9:
-                        ranking += " AA";
+                        ranking += " AA - NOT BAD";
                     case 10:
-                        ranking += " A:";
+                        ranking += " A: - TRY HARDER";
                     case 11:
-                        ranking += " A.";
+                        ranking += " A. - TRY HARDER";
                     case 12:
-                        ranking += " A";
+                        ranking += " A - TRY HARDER";
                     case 13:
-                        ranking += " B";
+                        ranking += " B - GIT GUD";
                     case 14:
-                        ranking += " C";
+                        ranking += " C - SKILL ISSUE";
                     case 15:
-                        ranking += " D";
+                        ranking += " D - HOW CAN YOU SUCK THIS HARD";
                 }
                 break;
             }

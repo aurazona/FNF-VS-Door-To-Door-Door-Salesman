@@ -139,6 +139,43 @@ class PlayState extends MusicBeatState
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
 	private var songPositionBar:Float = 0;
+
+	var door:FlxSprite; //doorframe for house stage layering
+	var bfX:Float; //x pos for BF swapping
+	var bfY:Float; //y pos for BF swapping
+	var bf2:Boyfriend; //2nd boyfriend
+	var bf2A:Bool = false; //bool for if bf2 is active
+	var bf3:Boyfriend; //3rd boyfriend
+	var bf3A:Bool = false;
+	var bf4:Boyfriend; //4th boyfriend
+	var bf4A:Bool = false;
+	var bf5:Boyfriend; //5th boyfriend
+	var bf5A:Bool = false;
+	var poison:Bool = false; //bool controlling poison notes (enemy notes hurt player)
+	var hpBound1:Bool = false; //bool controlling health bounding (see line 1917 for more info lmaooo)
+	var hpBound2:Bool = false;
+	var hpBound3:Bool = false;
+	var hpBound4:Bool = false;
+	var stageExitOffset:Float = 0;
+	var door1:FlxSprite;
+	var door2:FlxSprite;
+	var door3:FlxSprite;
+	var door4:FlxSprite;
+	var doorslam:FlxSound;
+	var frontcameo:FlxSprite;
+	var boogiedemon:BackgroundDancer;
+	var dadCamMidpoint:FlxPoint;
+	var bfCamMidpoint:FlxPoint;
+	var dadUpPoint:FlxPoint;
+	var dadDownPoint:FlxPoint;
+	var dadLeftPoint:FlxPoint;
+	var dadRightPoint:FlxPoint;
+	var bfUpPoint:FlxPoint;
+	var bfDownPoint:FlxPoint;
+	var bfLeftPoint:FlxPoint;
+	var bfRightPoint:FlxPoint;
+	var camIsDad:Bool;
+	var camIsBf:Bool;
 	
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
@@ -341,6 +378,12 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('heavens door/heavens doorDialogue'));
 			case 'ajar':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('ajar/ajarDialogue'));
+			case 'doorman':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('doorman/doormanDialogue'));
+			case 'doorkicker':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('doorkicker/doorkickerDialogue'));
+			case 'stage exit':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('stage exit/stage exitDialogue'));
 		}
 
 		switch(SONG.stage)
@@ -693,6 +736,23 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 	
 						add(stageCurtains);
+
+						if(curSong.toLowerCase() == 'stage exit') //i apologise for nothing.
+							{
+								door2.frames = Paths.getSparrowAtlas('falling_door.png');
+								door2.animation.addByPrefix('fall', 'falling door', 24, false);
+								door2.visible = false;
+								door3.frames = Paths.getSparrowAtlas('falling_door.png');
+								door3.animation.addByPrefix('fall', 'falling door', 24, false);
+								door3.visible = false;
+								door4.frames = Paths.getSparrowAtlas('falling_door.png');
+								door4.animation.addByPrefix('fall', 'falling door', 24, false);
+								door4.visible = false;
+								//add(door1);
+								//add(door2);
+								//add(door3);
+								//add(door4);
+							}
 				}
 			case 'house':
 			{
@@ -701,7 +761,7 @@ class PlayState extends MusicBeatState
 				curStage = 'house';
 
 				//reagan and bush, reagan and bush, these are the words that will grant me the kush.
-				var bush:FlxSprite = new FlxSprite(-450, 100).loadGraphic(Paths.image('houseBush1', 'shared'));
+				var bush:FlxSprite = new FlxSprite(-450, -150).loadGraphic(Paths.image('houseBush1', 'shared'));
 				bush.antialiasing = true;
 				//bush.setGraphicSize(2594, 955);
 				//bush.scrollFactor.set(0, 0);
@@ -709,7 +769,7 @@ class PlayState extends MusicBeatState
 				add(bush);
 
 				//i'm only doing these comments to keep me sane because FUCK BACKGROUND IMPLEMENTATION AAAAAAAAAAAAAAAAAAAAA
-				var porch:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('housePorch2', 'shared'));
+				var porch:FlxSprite = new FlxSprite(-450,-150).loadGraphic(Paths.image('housePorch2', 'shared'));
 				//porch.setGraphicSize(2594, 955);
 				porch.antialiasing = true;
 				//porch.scrollFactor.set(0, 0);
@@ -717,7 +777,7 @@ class PlayState extends MusicBeatState
 				add(porch);
 
 				//let the bodies hit the floor
-				var floor:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('houseFloor3', 'shared'));
+				var floor:FlxSprite = new FlxSprite(-450,-150).loadGraphic(Paths.image('houseFloor3', 'shared'));
 				//floor.setGraphicSize(2594, 955);
 				floor.antialiasing = true;
 				//floor.scrollFactor.set(0, 0);
@@ -725,13 +785,51 @@ class PlayState extends MusicBeatState
 				add(floor);
 
 				//open the door, get on the floor, everybody do the dinosaur
-				var door:FlxSprite = new FlxSprite(-450,100).loadGraphic(Paths.image('houseDoor4', 'shared'));
+				door = new FlxSprite(-450, -150).loadGraphic(Paths.image('houseDoor4', 'shared'));
 				//door.setGraphicSize(2594, 955);
 				door.antialiasing = true;
 				//door.scrollFactor.set(0, 0);
 				door.active = false;
-				add(door);
+				//add(door);
 			}
+			case 'staged2dds':
+				{
+						defaultCamZoom = 0.9;
+						curStage = 'staged2dds';
+						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+						bg.antialiasing = true;
+						bg.scrollFactor.set(0.9, 0.9);
+						bg.active = false;
+						add(bg);
+
+						var bgcameo:FlxSprite = new FlxSprite(-650, -200).loadGraphic(Paths.image('StageCameoBehind'));
+						bgcameo.antialiasing = true;
+						bgcameo.scrollFactor.set(0.9, 0.9);
+						bgcameo.active = false;
+						add(bgcameo);
+	
+						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+						stageFront.updateHitbox();
+						stageFront.antialiasing = true;
+						stageFront.scrollFactor.set(0.9, 0.9);
+						stageFront.active = false;
+						add(stageFront);
+	
+						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+						stageCurtains.updateHitbox();
+						stageCurtains.antialiasing = true;
+						stageCurtains.scrollFactor.set(1.3, 1.3);
+						stageCurtains.active = false;
+	
+						add(stageCurtains);
+
+						frontcameo = new FlxSprite(-650, -200).loadGraphic(Paths.image('StageCameoFront'));
+						frontcameo.antialiasing = true;
+						frontcameo.scrollFactor.set(1.3, 1.3);
+						frontcameo.active = false;
+				}
 			default:
 			{
 					defaultCamZoom = 0.9;
@@ -818,9 +916,38 @@ class PlayState extends MusicBeatState
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'bastard':
-				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 400);
+				dad.setGraphicSize(Std.int(dad.width * 1.2), 0);
+				//dad.x -= 50;
+				dad.y -= 25;
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 550);
+				dadCamMidpoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 100); //funky dynamic cam movement shit starts here
+				dadUpPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadUpPoint.subtract(0, 50);
+				dadDownPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadDownPoint.add(0, 50);
+				dadLeftPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadLeftPoint.subtract(50, 0);
+				dadRightPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadRightPoint.add(50);
+				dad.updateHitbox();
 			case 'bastardns':
-				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 400);
+				dad.x -= 50;
+				dad.y -= 50;
+				dad.setGraphicSize(Std.int(dad.width * 1.2), 0);
+				
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 250);
+				dadCamMidpoint = new FlxPoint(dad.getMidpoint().x, dad.getMidpoint().y - 100);
+				dadUpPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);//.y - 20;
+				dadUpPoint.subtract(0, 50);
+				dadDownPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);//.y + 20;
+				dadDownPoint.add(0, 50);
+				//dadDownPoint.subtract(0, 80);
+				dadLeftPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);//.x - 20;
+				dadLeftPoint.subtract(50, 0);
+				dadRightPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);//.x + 20;
+				dadRightPoint.add(50);
+				dad.updateHitbox();
+				//dadRightPoint.subtract(0, 100);
 		}
 
 
@@ -864,20 +991,69 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+			case 'house':
+				if(SONG.player1 == 'bf')
+				{
+					boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.8), 0);
+					boyfriend.updateHitbox();
+				}
+				dad.y += 10;
+			case 'stage':
+				if(SONG.player1 == 'bf-dad')
+				{
+					boyfriend.y -= 300;
+				}
+				dad.y -= 10;
+			case 'staged2dds':
+				if(SONG.player1 == 'bf-dad')
+					boyfriend.y -= 300;
+				dad.y -= 10;
 		}
-		if (curStage != 'house')
+
+		bfCamMidpoint = new FlxPoint(boyfriend.getGraphicMidpoint().x - 50, boyfriend.getGraphicMidpoint().y); //funky cam movement for bf side here lmao
+		if (boyfriend.curCharacter == 'bf-dad')
+			bfCamMidpoint.subtract(0, 50);
+		bfUpPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfUpPoint.subtract(0, 50);
+		bfDownPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfDownPoint.add(0, 50);
+		bfLeftPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfLeftPoint.subtract (50);
+		bfRightPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfRightPoint.add(50);
+
+		if (curStage != 'house') //tried an or comparator, shit no worky lol
+		{
 			add(gf);
+		}
+		if (curStage == 'stage')
+		{
+			remove(gf);
+		}
+		if (curStage == 'staged2dds')
+		{
+			remove(gf); //yeet that bitch
+			boogiedemon = new BackgroundDancer(275, 200);
+			boogiedemon.setGraphicSize(0, 600);
+			boogiedemon.updateHitbox();
+			add(boogiedemon);
+		}
 
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
 			add(limo);
-
 		add(dad);
 		add(boyfriend);
+		
+		if (curStage == 'house') //silly salesman, the doorframe is in front of you!
+			add(door);
+		if (curStage == 'staged2dds') //add some poggers people
+			add(frontcameo);
 		if (loadRep)
 		{
 			FlxG.watch.addQuick('rep rpesses',repPresses);
 			FlxG.watch.addQuick('rep releases',repReleases);
+			
 			
 			FlxG.save.data.botplay = true;
 			FlxG.save.data.scrollSpeed = rep.replay.noteSpeed;
@@ -913,7 +1089,8 @@ class PlayState extends MusicBeatState
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 
-		camFollow.setPosition(camPos.x, camPos.y);
+		camFollow.setPosition(camPos.x, camPos.y - 500);
+
 
 		if (prevCamFollow != null)
 		{
@@ -935,7 +1112,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.songPosition) // I dont wanna talk about this code :(
 			{
 				songPosBG = new FlxSprite(0, 10).loadGraphic(Paths.image('healthBar'));
-				if (FlxG.save.data.downscroll)
+				if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
 					songPosBG.y = FlxG.height * 0.9 + 45; 
 				songPosBG.screenCenter(X);
 				songPosBG.scrollFactor.set();
@@ -948,7 +1125,7 @@ class PlayState extends MusicBeatState
 				add(songPosBar);
 	
 				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.song, 16);
-				if (FlxG.save.data.downscroll)
+				if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
 					songName.y -= 3;
 				songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 				songName.scrollFactor.set();
@@ -957,7 +1134,7 @@ class PlayState extends MusicBeatState
 			}
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
-		if (FlxG.save.data.downscroll)
+		if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
 			healthBarBG.y = 50;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -971,7 +1148,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer : ""), 16);
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE DOOR" + MainMenuState.kadeEngineVer : ""), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -980,6 +1157,8 @@ class PlayState extends MusicBeatState
 			kadeEngineWatermark.y = FlxG.height * 0.9 + 45;
 
 		scoreTxt = new FlxText(FlxG.width / 2 - 235, healthBarBG.y + 50, 0, "", 20);
+		if(curSong.toLowerCase() == 'stage exit')
+			scoreTxt.y = 50;
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -997,9 +1176,10 @@ class PlayState extends MusicBeatState
 			add(replayTxt);
 		}
 		// Literally copy-paste of the above, fu
-		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (FlxG.save.data.downscroll ? 100 : -100), 0, "BOTPLAY", 20);
-		botPlayState.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-		botPlayState.scrollFactor.set();
+		//BOTPLAY TEXT HERE
+		//botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (FlxG.save.data.downscroll ? 100 : -100), 0, "BOTPLAY", 20);
+		//botPlayState.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		//botPlayState.scrollFactor.set();
 		
 		if(FlxG.save.data.botplay && !loadRep) add(botPlayState);
 
@@ -1079,6 +1259,13 @@ class PlayState extends MusicBeatState
 				case 'heavens door':
 					schoolIntro(doof);
 				case 'ajar':
+					schoolIntro(doof);
+				case 'doorman':
+					schoolIntro(doof);
+				case 'doorkicker':
+					doof.finishThing = buttonIntro;
+					schoolIntro(doof);
+				case 'stage exit':
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -1176,11 +1363,34 @@ class PlayState extends MusicBeatState
 					}
 				}
 				else
+
 					startCountdown();
 
 				remove(black);
 			}
 		});
+	}
+
+	public function buttonIntro():Void
+	{
+		var d2ddspoint:FlxPoint = dad.getGraphicMidpoint();
+		d2ddspoint.y = dad.getGraphicMidpoint().y + 75;
+		camFollow.setPosition(dad.getMidpoint().x, dad.getMidpoint().y - 100 + 25);
+		camHUD.visible = false;
+		FlxTween.tween(FlxG.camera, {zoom: 1}, 0.3, {ease: FlxEase.quadInOut});
+		//FlxG.camera.focusOn(d2ddspoint);
+		dad.playAnim('cutscene button');
+		//button sound at 1.95 seconds
+		new FlxTimer().start(1.95, function(e:FlxTimer)
+		{
+			FlxG.sound.play(Paths.sound('beep'));
+		});
+		new FlxTimer().start(3, function(e:FlxTimer)
+		{
+			camHUD.visible = true;
+			startCountdown();
+		});
+
 	}
 
 	var startTimer:FlxTimer;
@@ -1220,7 +1430,16 @@ class PlayState extends MusicBeatState
 			dad.dance();
 			gf.dance();
 			boyfriend.playAnim('idle');
-
+			//yes, i know this is terrible.
+			//no, i'm not gonna bother optimising it. cry about it.
+			if (bf2A)
+				bf2.playAnim('idle');
+			if (bf3A)
+				bf3.playAnim('idle');
+			if (bf4A)
+				bf4.playAnim('idle');
+			if (bf5A)
+				bf5.playAnim('idle');
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
 			introAssets.set('school', [
@@ -1880,13 +2099,23 @@ class PlayState extends MusicBeatState
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
 
-		var iconOffset:Int = 26;
+		var iconOffset:Int = 0; //CHANGED FROM 26
+		if(curSong.toLowerCase() == 'stage exit')
+			stageExitOffset = 30;
 
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset - stageExitOffset);
+		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset) - stageExitOffset;
 
-		if (health > 2)
+		if (health > 2) //HEALTH BOUNDING SHIT
 			health = 2;
+		if (hpBound1 && health > 1.6) //this hopefully works i guess?? looked at bounds and said 'fuck that' lmao
+			health = 1.6;
+		if (hpBound2 && health > 1.2)
+			health = 1.2;
+		if (hpBound3 && health > 0.8)
+			health = 0.8;
+		if (hpBound4 && health > 0.4)
+			health = 0.4;
 		if (healthBar.percent < 20)
 			iconP1.animation.curAnim.curFrame = 1;
 		else
@@ -2078,7 +2307,13 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y - 100 + offsetY);
+				if (!camIsDad)
+				{
+					camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y + offsetY); //DAD CAM X LOCK
+					camIsDad = true;
+					camIsBf = false;
+				}
+
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerTwoTurn', []);
@@ -2096,9 +2331,9 @@ class PlayState extends MusicBeatState
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
 					case 'bastard':
-						camFollow.y = dad.getMidpoint().y + 25;
+						//camFollow.y = dad.getMidpoint().y - 125;
 					case 'bastardns':
-						camFollow.y = dad.getMidpoint().y + 25;
+						//camFollow.y = dad.getMidpoint().y + 25;
 				}
 
 				if (dad.curCharacter == 'mom')
@@ -2116,7 +2351,13 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
+				if (!camIsBf)
+				{
+					camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
+					camIsBf = true;
+					camIsDad = false;
+				}
+
 
 				#if windows
 				if (luaModchart != null)
@@ -2147,6 +2388,15 @@ class PlayState extends MusicBeatState
 
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
+		FlxG.watch.addQuick("CamFollow Y", camFollow.y);
+		FlxG.watch.addQuick("dad Y", dad.y);
+		if (SONG.player1 == 'bastard')
+		{
+			FlxG.watch.addQuick("upPoint Y", dadUpPoint.y);
+			FlxG.watch.addQuick("rightPoint Y", dadRightPoint.y);
+			FlxG.watch.addQuick("upPoint X", dadUpPoint.x);
+			FlxG.watch.addQuick("rightPoint X", dadRightPoint.x);
+		}
 
 		if (curSong == 'Fresh')
 		{
@@ -2333,16 +2583,32 @@ class PlayState extends MusicBeatState
 								altAnim = '-alt';
 						}
 	
-						switch (Math.abs(daNote.noteData))
+						switch (Math.abs(daNote.noteData)) //DAD SIDE NOTE HIT SHIT
 						{
 							case 2:
 								dad.playAnim('singUP' + altAnim, true);
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+									camFollow.setPosition(dadUpPoint.x, dadUpPoint.y);
+								if (poison)
+									health -= 0.02;
 							case 3:
 								dad.playAnim('singRIGHT' + altAnim, true);
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+									camFollow.setPosition(dadRightPoint.x, dadRightPoint.y);
+								if (poison)
+									health -= 0.02;
 							case 1:
 								dad.playAnim('singDOWN' + altAnim, true);
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+									camFollow.setPosition(dadDownPoint.x, dadDownPoint.y);
+								if (poison)
+									health -= 0.02;
 							case 0:
 								dad.playAnim('singLEFT' + altAnim, true);
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+									camFollow.setPosition(dadLeftPoint.x, dadLeftPoint.y);
+								if (poison)
+									health -= 0.02;
 						}
 						
 						if (FlxG.save.data.cpuStrums)
@@ -2451,7 +2717,7 @@ class PlayState extends MusicBeatState
 
 
 		#if debug
-		if (FlxG.keys.justPressed.ONE)
+		if (FlxG.keys.justPressed.TWO && FlxG.save.data.botplay)
 			endSong();
 		#end
 	}
@@ -2505,6 +2771,11 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
+					if (SONG.song.toLowerCase() == 'stage exit')
+						{
+							FlxG.switchState(new EndingState());
+						}
+
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					transIn = FlxTransitionableState.defaultTransIn;
@@ -3238,12 +3509,52 @@ class PlayState extends MusicBeatState
 					{
 						case 2:
 							boyfriend.playAnim('singUP', true);
+							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+								camFollow.setPosition(bfUpPoint.x, bfUpPoint.y);
+							if (bf2A) //i know this is probably terrible but fuck you
+								bf2.playAnim('singUP', true);
+							if (bf3A)
+								bf3.playAnim('singUP', true);
+							if (bf4A)
+								bf4.playAnim('singUP', true);
+							if (bf5A)
+								bf5.playAnim('singUP', true);
 						case 3:
 							boyfriend.playAnim('singRIGHT', true);
+							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+								camFollow.setPosition(bfRightPoint.x, bfRightPoint.y);
+							if (bf2A)
+								bf2.playAnim('singRIGHT', true);
+							if (bf3A)
+								bf3.playAnim('singRIGHT', true);
+							if (bf4A)
+								bf4.playAnim('singRIGHT', true);
+							if (bf5A)
+								bf5.playAnim('singRIGHT', true);
 						case 1:
 							boyfriend.playAnim('singDOWN', true);
+							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+								camFollow.setPosition(bfDownPoint.x, bfDownPoint.y);
+							if (bf2A)
+								bf2.playAnim('singDOWN', true);
+							if (bf3A)
+								bf3.playAnim('singDOWN', true);
+							if (bf4A)
+								bf4.playAnim('singDOWN', true);
+							if (bf5A)
+								bf5.playAnim('singDOWN', true);
 						case 0:
 							boyfriend.playAnim('singLEFT', true);
+							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+								camFollow.setPosition(bfLeftPoint.x, bfLeftPoint.y);
+							if (bf2A)
+								bf2.playAnim('singLEFT', true);
+							if (bf3A)
+								bf3.playAnim('singLEFT', true);
+							if (bf4A)
+								bf4.playAnim('singLEFT', true);
+							if (bf5A)
+								bf5.playAnim('singLEFT', true);
 					}
 		
 					#if windows
@@ -3542,6 +3853,225 @@ class PlayState extends MusicBeatState
 						trainStart();
 					}
 				}
+			case 'staged2dds':
+				boogiedemon.dance();
+		}
+
+		if(curSong.toLowerCase() == 'ajar crossover')
+		{
+			switch(curStep) //if there's a better way to do this i'm sorry, pls no bully ;-;
+			{
+				case 128:
+					bfX = boyfriend.x;
+					bfY = boyfriend.y;
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY - 250, 'dad');
+					add(boyfriend);
+				case 192:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX - 50, bfY, 'senpai');
+					add(boyfriend);
+				case 224:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX + 25, bfY - 150, 'spirit');
+					add(boyfriend);
+				case 256:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'bf');
+					add(boyfriend);
+				case 416:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'spooky');
+					add(boyfriend);
+				case 544:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY - 250, 'mom');
+					add(boyfriend);
+				case 672:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY - 250, 'dad');
+					add(boyfriend);
+				case 768:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'bf');
+					add(boyfriend);
+				case 896:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX + 25, bfY - 150, 'spirit');
+					add(boyfriend);
+				case 928:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY - 250, 'mom');
+					add(boyfriend);
+				case 960:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'bf');
+					add(boyfriend);
+				case 1008:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'spooky');
+					add(boyfriend);
+				case 1088:
+					remove(boyfriend);
+					boyfriend = new Boyfriend(bfX, bfY, 'bf');
+					add(boyfriend);
+				case 1120:
+					remove(boyfriend);
+					bf2 = new Boyfriend(bfX, bfY - 250, 'dad');
+					bf2A = true;
+					add(bf2);
+					add(boyfriend);
+				case 1152:
+					remove(boyfriend);
+					bf3 = new Boyfriend(bfX - 50, bfY, 'senpai');
+					bf4 = new Boyfriend(bfX + 25, bfY - 150, 'spirit');
+					bf3A = true;
+					bf4A = true;
+					add(bf3);
+					add(bf4);
+					add(boyfriend);
+				case 1184:
+					remove(boyfriend);
+					bf5 = new Boyfriend(bfX + 50, bfY - 250, 'mom');
+					bf5A = true;
+					add(bf5);
+					add(boyfriend);
+			}
+		}
+
+		if(curSong.toLowerCase() == 'doorkicker')
+		{
+			if(!FlxG.save.data.botplay)
+				poison = true;
+			//trace("NON-CONDITIONAL POISON WORKS");
+			if (curStep == 163)
+			{
+				trace("POISON SHOULD BE ON");
+				poison = true;
+			}
+			if (curStep == 567)
+			{
+				trace("POISON SHOULD BE OFF");
+				poison = false;
+			}
+			 
+			switch(curStep)
+			{
+				case 1:
+					trace("POISON ON CHECK");
+					poison = true;
+				case 2:
+					poison = false;
+					trace("POISON OFF CHECK");
+				case 163:
+					poison = true;
+					trace("POISON SHOULD BE ON");
+					//d2dds button press anim goes here
+				case 567:
+					poison = false;
+					trace("POISON SHOULD BE OFF");
+					//sumn like 'shit it broke' here
+			}
+				
+		}
+
+		if (curSong.toLowerCase() == 'stage exit')
+		{
+			doorslam = new FlxSound().loadEmbedded(Paths.sound('doorslam'));
+			switch(curStep)
+			{
+				case 128:
+					trace("HP BOUND 1 ON");
+					door1 = new FlxSprite(0, 100).loadGraphic(Paths.image('falling_door'));
+					door1.frames = Paths.getSparrowAtlas('falling_door');
+					door1.animation.addByPrefix('fall', 'falling door', 24, false);
+					door1.visible = false;
+					door1.setGraphicSize(0, 600); //finding the right size took more time than i'm proud to say.
+					door1.updateHitbox();
+					door1.screenCenter(X);
+					add(door1); //DOOR SHIT, DOOR SHIT, PLEASE, I BEG YOU
+					door1.cameras = [camHUD];
+					door1.x = (door1.x - 210);
+					door1.visible = true;
+					door1.animation.play('fall');
+					new FlxTimer().start(0.3, function(e:FlxTimer)
+					{
+						hpBound1 = true;
+						doorslam.play();
+						camHUD.shake(0.005, 0.1);
+					});
+					//also add door summoning anim and sound effect
+				case 448:
+					trace("HP BOUND 2 ON");
+					remove(door1);
+					door2 = new FlxSprite(0, 100).loadGraphic(Paths.image('falling_door'));
+					door2.frames = Paths.getSparrowAtlas('falling_door');
+					door2.animation.addByPrefix('fall', 'falling door', 24, false);
+					door2.visible = false;
+					door2.setGraphicSize(0, 600);
+					door2.updateHitbox();
+					door2.screenCenter(X);
+					add(door2); //DOOR SHIT
+					door2.cameras = [camHUD];
+					door2.x = (door2.x - 85);
+					door2.visible = true;
+					door2.animation.play('fall');
+					new FlxTimer().start(0.3, function(e:FlxTimer)
+					{
+						hpBound2 = true;
+						doorslam.play();
+						camHUD.shake(0.005, 0.1);
+					});
+					//also add door summoning anim and sound effect
+				case 480:
+					trace("HP BOUND 3 ON");
+					remove(door2);
+					door3 = new FlxSprite(0, 100).loadGraphic(Paths.image('falling_door'));
+					door3.frames = Paths.getSparrowAtlas('falling_door');
+					door3.animation.addByPrefix('fall', 'falling door', 24, false);
+					door3.visible = false;
+					door3.setGraphicSize(0, 600);
+					door3.updateHitbox();
+					door3.screenCenter(X);
+					add(door3); //DOOR SHIT
+					door3.cameras = [camHUD];
+					door3.x = (door3.x + 30);
+					door3.visible = true;
+					door3.animation.play('fall');
+					new FlxTimer().start(0.3, function(e:FlxTimer)
+					{
+						hpBound3 = true;
+						doorslam.play();
+						camHUD.shake(0.005, 0.1);
+					});
+					//also add door summoning anim and sound effect
+				case 648:
+					trace("HP BOUND 4 ON");
+					remove(door3);
+					door4 = new FlxSprite(0, 100).loadGraphic(Paths.image('falling_door'));
+					door4.frames = Paths.getSparrowAtlas('falling_door');
+					door4.animation.addByPrefix('fall', 'falling door', 24, false);
+					door4.visible = false;
+					door4.setGraphicSize(0, 600);
+					door4.updateHitbox();
+					door4.screenCenter(X);
+					add(door4); //DOOR SHIT
+					door4.cameras = [camHUD];
+					door4.x = (door4.x + 150);
+					door4.visible = true;
+					door4.animation.play('fall');
+					new FlxTimer().start(0.3, function(e:FlxTimer)
+					{
+						hpBound4 = true;
+						doorslam.play();
+						camHUD.shake(0.005, 0.1);
+					});
+					//also add door summoning anim and sound effect
+				//step 128: hpBound1
+				//step 448: hpBound2
+				//step 480: hpBound3
+				//step 648: hpBound4
+			}
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
