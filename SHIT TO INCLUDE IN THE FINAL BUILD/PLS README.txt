@@ -8,11 +8,13 @@ Aurazona - Programming & Music
 
 Seabo - D2DDS Voice Acting
 
+Fireable - Programming
+
+Lad - Infinidoor Charting
+
 Ito - Background Art Assistance
 
 Sketchaphobia - BF Death Animation
-
-Fireable - Programming Assistance
 
 Testers:
 
@@ -40,6 +42,8 @@ Masato Nakamura - Original composer of Doorcember and Heaven's Door
 Naofumi Hataya - Original composer of Doorman
 
 Tatsuyuki Maeda - Original composer of Doorkicker
+
+Anonymous - Original composer of Infinidoor
 
 THINGS YOU SHOULD PROBABLY KNOW:
 

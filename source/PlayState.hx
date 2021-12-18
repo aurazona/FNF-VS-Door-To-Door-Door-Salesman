@@ -143,6 +143,7 @@ class PlayState extends MusicBeatState
 	var door:FlxSprite; //doorframe for house stage layering
 	var bfX:Float; //x pos for BF swapping
 	var bfY:Float; //y pos for BF swapping
+	var bfA:Bool = true; //controls whether or not BF plays anims when singing, mainly used for infinidoor 
 	var bf2:Boyfriend; //2nd boyfriend
 	var bf2A:Bool = false; //bool for if bf2 is active
 	var bf3:Boyfriend; //3rd boyfriend
@@ -163,6 +164,7 @@ class PlayState extends MusicBeatState
 	var door4:FlxSprite;
 	var doorslam:FlxSound;
 	var frontcameo:FlxSprite;
+	var bgcameo:FlxSprite;
 	var boogiedemon:BackgroundDancer;
 	var dadCamMidpoint:FlxPoint;
 	var bfCamMidpoint:FlxPoint;
@@ -176,6 +178,8 @@ class PlayState extends MusicBeatState
 	var bfRightPoint:FlxPoint;
 	var camIsDad:Bool;
 	var camIsBf:Bool;
+	var dadSetup:Bool = false; //used to set up DD in infinidoor
+	var camMovementEnabled = false; //used to tell whether or not to move the cam based on character animations.
 	
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
@@ -802,7 +806,7 @@ class PlayState extends MusicBeatState
 						bg.active = false;
 						add(bg);
 
-						var bgcameo:FlxSprite = new FlxSprite(-650, -200).loadGraphic(Paths.image('StageCameoBehind'));
+						bgcameo = new FlxSprite(-650, -200).loadGraphic(Paths.image('StageCameoBehind'));
 						bgcameo.antialiasing = true;
 						bgcameo.scrollFactor.set(0.9, 0.9);
 						bgcameo.active = false;
@@ -892,32 +896,41 @@ class PlayState extends MusicBeatState
 
 			case "spooky":
 				dad.y += 200;
+
 			case "monster":
 				dad.y += 100;
+
 			case 'monster-christmas':
 				dad.y += 130;
+
 			case 'dad':
 				camPos.x += 400;
+
 			case 'pico':
 				camPos.x += 600;
 				dad.y += 300;
+
 			case 'parents-christmas':
 				dad.x -= 500;
+
 			case 'senpai':
 				dad.x += 150;
 				dad.y += 360;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				
 			case 'senpai-angry':
 				dad.x += 150;
 				dad.y += 360;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+
 			case 'spirit':
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+
 			case 'bastard':
 				dad.setGraphicSize(Std.int(dad.width * 1.2), 0);
-				//dad.x -= 50;
+				dad.x -= 50;
 				dad.y -= 25;
 				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 550);
 				dadCamMidpoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 100); //funky dynamic cam movement shit starts here
@@ -930,6 +943,8 @@ class PlayState extends MusicBeatState
 				dadRightPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
 				dadRightPoint.add(50);
 				dad.updateHitbox();
+				camMovementEnabled = true;
+
 			case 'bastardns':
 				dad.x -= 50;
 				dad.y -= 50;
@@ -948,6 +963,21 @@ class PlayState extends MusicBeatState
 				dadRightPoint.add(50);
 				dad.updateHitbox();
 				//dadRightPoint.subtract(0, 100);
+				camMovementEnabled = true;
+
+			case 'sticky':
+				dad.y += 200;
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+				dadCamMidpoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y); //funky dynamic cam movement shit starts here
+				dadUpPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadUpPoint.subtract(0, 50);
+				dadDownPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadDownPoint.add(0, 50);
+				dadLeftPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadLeftPoint.subtract(50, 0);
+				dadRightPoint = new FlxPoint(dadCamMidpoint.x, dadCamMidpoint.y);
+				dadRightPoint.add(50);
+				camMovementEnabled = true;
 		}
 
 
@@ -997,6 +1027,10 @@ class PlayState extends MusicBeatState
 					boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.8), 0);
 					boyfriend.updateHitbox();
 				}
+				if(SONG.player1 == 'bf-bastard')
+				{
+					boyfriend.setGraphicSize(Std.int(boyfriend.width * 1.2), 0);
+				}
 				dad.y += 10;
 			case 'stage':
 				if(SONG.player1 == 'bf-dad')
@@ -1010,21 +1044,12 @@ class PlayState extends MusicBeatState
 				dad.y -= 10;
 		}
 
-		bfCamMidpoint = new FlxPoint(boyfriend.getGraphicMidpoint().x - 50, boyfriend.getGraphicMidpoint().y); //funky cam movement for bf side here lmao
-		if (boyfriend.curCharacter == 'bf-dad')
-			bfCamMidpoint.subtract(0, 50);
-		bfUpPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
-		bfUpPoint.subtract(0, 50);
-		bfDownPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
-		bfDownPoint.add(0, 50);
-		bfLeftPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
-		bfLeftPoint.subtract (50);
-		bfRightPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
-		bfRightPoint.add(50);
+
 
 		if (curStage != 'house') //tried an or comparator, shit no worky lol
 		{
 			add(gf);
+			gf.dance();
 		}
 		if (curStage == 'stage')
 		{
@@ -1044,6 +1069,9 @@ class PlayState extends MusicBeatState
 			add(limo);
 		add(dad);
 		add(boyfriend);
+
+		dad.dance();
+		boyfriend.playAnim('idle');
 		
 		if (curStage == 'house') //silly salesman, the doorframe is in front of you!
 			add(door);
@@ -1085,6 +1113,23 @@ class PlayState extends MusicBeatState
 
 		generateSong(SONG.song);
 
+		//moved bf cam movement here to account for generateSong()'s position up there
+		bfCamMidpoint = new FlxPoint(boyfriend.getGraphicMidpoint().x - 50, boyfriend.getGraphicMidpoint().y); //funky cam movement for bf side here lmao
+		if (boyfriend.curCharacter == 'bf-dad')
+			bfCamMidpoint.subtract(0, 50);
+		if (boyfriend.curCharacter == 'bf-bastard')
+			bfCamMidpoint.subtract(0, 75);
+		if (SONG.song.toLowerCase() == 'infinidoor')
+			bfCamMidpoint.subtract(0, 100);
+		bfUpPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfUpPoint.subtract(0, 50);
+		bfDownPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfDownPoint.add(0, 50);
+		bfLeftPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfLeftPoint.subtract (50);
+		bfRightPoint = new FlxPoint(bfCamMidpoint.x, bfCamMidpoint.y);
+		bfRightPoint.add(50);
+
 		// add(strumLine);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -1112,7 +1157,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.songPosition) // I dont wanna talk about this code :(
 			{
 				songPosBG = new FlxSprite(0, 10).loadGraphic(Paths.image('healthBar'));
-				if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
+				if (FlxG.save.data.downscroll)
 					songPosBG.y = FlxG.height * 0.9 + 45; 
 				songPosBG.screenCenter(X);
 				songPosBG.scrollFactor.set();
@@ -1125,7 +1170,7 @@ class PlayState extends MusicBeatState
 				add(songPosBar);
 	
 				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.song, 16);
-				if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
+				if (FlxG.save.data.downscroll)
 					songName.y -= 3;
 				songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 				songName.scrollFactor.set();
@@ -1134,7 +1179,7 @@ class PlayState extends MusicBeatState
 			}
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
-		if (FlxG.save.data.downscroll && curSong.toLowerCase() != 'stage exit')
+		if (FlxG.save.data.downscroll)
 			healthBarBG.y = 50;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -1148,7 +1193,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE DOOR" + MainMenuState.kadeEngineVer : ""), 16);
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE DOOR TESTING BUILD" + MainMenuState.kadeEngineVer : ""), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -1157,15 +1202,9 @@ class PlayState extends MusicBeatState
 			kadeEngineWatermark.y = FlxG.height * 0.9 + 45;
 
 		scoreTxt = new FlxText(FlxG.width / 2 - 235, healthBarBG.y + 50, 0, "", 20);
-		if(curSong.toLowerCase() == 'stage exit')
-			scoreTxt.y = 50;
-		if (!FlxG.save.data.accuracyDisplay)
-			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
-		if (offsetTesting)
-			scoreTxt.x += 300;
-		if(FlxG.save.data.botplay) scoreTxt.x = FlxG.width / 2 - 20;													  
+		scoreTxt.screenCenter(X);	
 		add(scoreTxt);
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (FlxG.save.data.downscroll ? 100 : -100), 0, "REPLAY", 20);
@@ -1214,6 +1253,7 @@ class PlayState extends MusicBeatState
 
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
+		stageExitOffset = 0;
 		
 		if (isStoryMode)
 		{
@@ -1275,8 +1315,23 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
+				case "infinidoor":
+				{
+					bfX = boyfriend.x;
+					bfY = boyfriend.y;
+					bf2 = new Boyfriend(bfX + 250, bfY - 350, 'bf-dad');
+					bf2A = true;
+					add(bf2);
+					remove(boyfriend);
+					add(boyfriend);
+					dadSetup = true;
+					trace("DAD SETUP COMPLETE");
+					startCountdown();
+				}
+
 				default:
 					startCountdown();
+
 			}
 		}
 
@@ -1432,14 +1487,10 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('idle');
 			//yes, i know this is terrible.
 			//no, i'm not gonna bother optimising it. cry about it.
-			if (bf2A)
+			if (curSong.toLowerCase() == 'infinidoor') //find out a way to get this shit to run only if the object is added - try + catch maybe???
+			{
 				bf2.playAnim('idle');
-			if (bf3A)
-				bf3.playAnim('idle');
-			if (bf4A)
-				bf4.playAnim('idle');
-			if (bf5A)
-				bf5.playAnim('idle');
+			}
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
 			introAssets.set('school', [
@@ -2059,6 +2110,8 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		scoreTxt.text = Ratings.CalculateRanking(songScore,songScoreDef,nps,maxNPS,accuracy);
+		scoreTxt.screenCenter(X);	
+
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
@@ -2100,8 +2153,6 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 0; //CHANGED FROM 26
-		if(curSong.toLowerCase() == 'stage exit')
-			stageExitOffset = 30;
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset - stageExitOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset) - stageExitOffset;
@@ -2430,6 +2481,8 @@ class PlayState extends MusicBeatState
 
 		if (health <= 0)
 		{
+			if(bf2A) //removes second boyfriend, worried that it'll fuck up the game over state
+				remove(bf2);
 			boyfriend.stunned = true;
 
 			persistentUpdate = false;
@@ -2587,25 +2640,25 @@ class PlayState extends MusicBeatState
 						{
 							case 2:
 								dad.playAnim('singUP' + altAnim, true);
-								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camMovementEnabled == true)
 									camFollow.setPosition(dadUpPoint.x, dadUpPoint.y);
 								if (poison)
 									health -= 0.02;
 							case 3:
 								dad.playAnim('singRIGHT' + altAnim, true);
-								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camMovementEnabled == true)
 									camFollow.setPosition(dadRightPoint.x, dadRightPoint.y);
 								if (poison)
 									health -= 0.02;
 							case 1:
 								dad.playAnim('singDOWN' + altAnim, true);
-								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camMovementEnabled == true)
 									camFollow.setPosition(dadDownPoint.x, dadDownPoint.y);
 								if (poison)
 									health -= 0.02;
 							case 0:
 								dad.playAnim('singLEFT' + altAnim, true);
-								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && (dad.curCharacter == 'bastard' || dad.curCharacter == 'bastardns'))
+								if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camMovementEnabled == true)
 									camFollow.setPosition(dadLeftPoint.x, dadLeftPoint.y);
 								if (poison)
 									health -= 0.02;
@@ -3311,7 +3364,17 @@ class PlayState extends MusicBeatState
 					if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 						boyfriend.playAnim('idle');
 				}
-		 
+
+				if (curSong.toLowerCase() == 'infinidoor')
+				{
+					if (bf2.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || FlxG.save.data.botplay && (bf2.isOnScreen(camGame) == true)))
+					{
+						if (bf2.animation.curAnim.name.startsWith('sing') && !bf2.animation.curAnim.name.endsWith('miss'))		
+							bf2.playAnim('idle');
+					}
+				 
+				}
+
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					if (pressArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
@@ -3358,12 +3421,20 @@ class PlayState extends MusicBeatState
 			{
 				case 0:
 					boyfriend.playAnim('singLEFTmiss', true);
+					if(bf2A)
+						bf2.playAnim('singLEFTmiss', true);
 				case 1:
 					boyfriend.playAnim('singDOWNmiss', true);
+					if(bf2A)
+						bf2.playAnim('singDOWNmiss', true);
 				case 2:
 					boyfriend.playAnim('singUPmiss', true);
+					if(bf2A)
+						bf2.playAnim('singUPmiss', true);
 				case 3:
 					boyfriend.playAnim('singRIGHTmiss', true);
+					if(bf2A)
+						bf2.playAnim('singRIGHTmiss', true);
 			}
 
 			#if windows
@@ -3508,7 +3579,10 @@ class PlayState extends MusicBeatState
 					switch (note.noteData)
 					{
 						case 2:
-							boyfriend.playAnim('singUP', true);
+							if (bfA)
+							{
+								boyfriend.playAnim('singUP', true);
+							}
 							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 								camFollow.setPosition(bfUpPoint.x, bfUpPoint.y);
 							if (bf2A) //i know this is probably terrible but fuck you
@@ -3520,7 +3594,10 @@ class PlayState extends MusicBeatState
 							if (bf5A)
 								bf5.playAnim('singUP', true);
 						case 3:
-							boyfriend.playAnim('singRIGHT', true);
+							if (bfA)
+							{
+								boyfriend.playAnim('singRIGHT', true);
+							}
 							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 								camFollow.setPosition(bfRightPoint.x, bfRightPoint.y);
 							if (bf2A)
@@ -3532,7 +3609,10 @@ class PlayState extends MusicBeatState
 							if (bf5A)
 								bf5.playAnim('singRIGHT', true);
 						case 1:
-							boyfriend.playAnim('singDOWN', true);
+							if (bfA)
+							{
+								boyfriend.playAnim('singDOWN', true);
+							}
 							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 								camFollow.setPosition(bfDownPoint.x, bfDownPoint.y);
 							if (bf2A)
@@ -3544,7 +3624,10 @@ class PlayState extends MusicBeatState
 							if (bf5A)
 								bf5.playAnim('singDOWN', true);
 						case 0:
-							boyfriend.playAnim('singLEFT', true);
+							if (bfA)
+							{
+								boyfriend.playAnim('singLEFT', true);
+							}
 							if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 								camFollow.setPosition(bfLeftPoint.x, bfLeftPoint.y);
 							if (bf2A)
@@ -3718,6 +3801,220 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence(detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "Acc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC,true,  songLength - Conductor.songPosition);
 		#end
 
+		if (curSong.toLowerCase() == 'infinidoor')
+			{
+	
+				switch(curStep)
+				{
+					case 128:
+					{
+						bf2A = false;
+						trace("DAD OFF 1");
+					}
+	
+					case 136:
+					{
+						bf2A = true;
+						bfA = false;
+						trace("BF OFF 2, STEP" + curStep);
+					}
+	
+					case 144:
+					{
+						bfA = true;
+						trace("BF ON 3");
+					}
+	
+					case 160:
+					{
+						bf2A = false;
+						trace("DAD OFF 4");
+					}
+	
+					case 168:
+					{
+						bf2A = true;
+						bfA = false;
+						trace("BF OFF 5, STEP" + curStep);
+					}
+	
+					case 176:
+					{
+						bfA = true;
+						trace("BF ON 6");
+					}
+	
+					case 208:
+					{
+						bfA = false;
+						trace("BF OFF 7, STEP" + curStep);
+					}
+	
+					case 220:
+					{
+						bfA = true;
+						trace("BF ON 8");
+					}
+
+					case 383:
+					{
+						bf2A = false;
+					}
+
+					case 638:
+					{
+						bf2A = true;
+						bfA = false;
+					}
+
+					case 831:
+					{
+						bfA = true;
+					}
+
+					case 928:
+					{
+						bfA = false;
+					}
+
+					case 944:
+					{
+						bf2A = false;
+						bfA = true;
+					}
+
+					case 967:
+					{
+						bf2A = true;
+						bfA = false;
+					}
+
+					case 983:
+					{
+						bfA = true;
+						bf2A = false;
+					}
+
+					case 1000:
+					{
+						bf2A = true;
+					}
+
+					case 1152:
+					{
+						bf2A = false;
+						trace("DAD OFF 1");
+					}
+	
+					case 1160:
+					{
+						bf2A = true;
+						bfA = false;
+						trace("BF OFF 2, STEP" + curStep);
+					}
+	
+					case 1167:
+					{
+						bfA = true;
+						trace("BF ON 3");
+					}
+	
+					case 1183:
+					{
+						bf2A = false;
+						trace("DAD OFF 4");
+					}
+	
+					case 1191:
+					{
+						bf2A = true;
+						bfA = false;
+						trace("BF OFF 5, STEP" + curStep);
+					}
+	
+					case 1200:
+					{
+						bfA = true;
+						trace("BF ON 6");
+					}
+	
+					case 1232:
+					{
+						bfA = false;
+						trace("BF OFF 7, STEP" + curStep);
+					}
+	
+					case 1243:
+					{
+						bfA = true;
+						trace("BF ON 8");
+					}
+
+					case 1311:
+					{
+						bfA = false;
+					}
+
+					case 1374:
+					{
+						bfA = true;
+						bf2A = false;
+					}
+
+					case 1439:
+					{
+						bf2A = true;
+					}
+
+					case 1487:
+					{
+						bf2A = false;
+					}
+
+					case 1510:
+					{
+						bf2A = true;
+						bfA = false;
+					}
+
+					case 1527:
+					{
+						bfA = true;
+					}
+
+					case 1566:
+					{
+						bf2A = false;
+					}
+
+					case 1630:
+					{
+						bf2A = true;
+						bfA = false;
+					}
+
+					case 1695:
+					{
+						bfA = true;
+					}
+
+					case 1918:
+					{
+						bf2A = false;
+					}
+
+					case 2175:
+					{
+						bf2A = true;
+						bfA = false;
+					}
+
+					case 2304:
+					{
+						bfA = true;
+					}
+				}
+			}
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -3784,6 +4081,14 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
 			boyfriend.playAnim('idle');
+		}
+
+		if (curSong.toLowerCase() == 'infinidoor')
+		{
+			if (!bf2.animation.curAnim.name.startsWith("sing"))
+			{
+				bf2.playAnim('idle');
+			}
 		}
 		
 		if (!dad.animation.curAnim.name.startsWith("sing"))
@@ -3855,6 +4160,35 @@ class PlayState extends MusicBeatState
 				}
 			case 'staged2dds':
 				boogiedemon.dance();
+				if (curBeat % 2 == 0)
+				{
+					FlxTween.tween(bgcameo, {
+						"scale.y": 0.98,
+						y: -190
+					}, 0.2, {
+						onComplete: function(flxTween:FlxTween)
+						{
+							FlxTween.tween(bgcameo, {
+								"scale.y": 1,
+								y: -200
+							}, 0.25);
+						}
+					});
+
+					FlxTween.tween(frontcameo, {
+						"scale.y": 0.98,
+						y: -190
+					}, 0.2, {
+						onComplete: function(flxTween:FlxTween)
+						{
+							FlxTween.tween(frontcameo, {
+								"scale.y": 1,
+								y: -200
+							}, 0.25);
+						}
+					});
+				}
+
 		}
 
 		if(curSong.toLowerCase() == 'ajar crossover')
@@ -3981,6 +4315,7 @@ class PlayState extends MusicBeatState
 			switch(curStep)
 			{
 				case 128:
+					stageExitOffset = 30;
 					trace("HP BOUND 1 ON");
 					door1 = new FlxSprite(0, 100).loadGraphic(Paths.image('falling_door'));
 					door1.frames = Paths.getSparrowAtlas('falling_door');
@@ -3992,6 +4327,11 @@ class PlayState extends MusicBeatState
 					add(door1); //DOOR SHIT, DOOR SHIT, PLEASE, I BEG YOU
 					door1.cameras = [camHUD];
 					door1.x = (door1.x - 210);
+					if (FlxG.save.data.downscroll)
+					{
+						door1.flipY = true;
+						door1.y = 0;
+					}
 					door1.visible = true;
 					door1.animation.play('fall');
 					new FlxTimer().start(0.3, function(e:FlxTimer)
@@ -4014,6 +4354,11 @@ class PlayState extends MusicBeatState
 					add(door2); //DOOR SHIT
 					door2.cameras = [camHUD];
 					door2.x = (door2.x - 85);
+					if (FlxG.save.data.downscroll)
+					{
+						door2.flipY = true;
+						door2.y = 0;
+					}
 					door2.visible = true;
 					door2.animation.play('fall');
 					new FlxTimer().start(0.3, function(e:FlxTimer)
@@ -4036,6 +4381,11 @@ class PlayState extends MusicBeatState
 					add(door3); //DOOR SHIT
 					door3.cameras = [camHUD];
 					door3.x = (door3.x + 30);
+					if (FlxG.save.data.downscroll)
+					{
+						door3.flipY = true;
+						door3.y = 0;
+					}
 					door3.visible = true;
 					door3.animation.play('fall');
 					new FlxTimer().start(0.3, function(e:FlxTimer)
@@ -4058,6 +4408,11 @@ class PlayState extends MusicBeatState
 					add(door4); //DOOR SHIT
 					door4.cameras = [camHUD];
 					door4.x = (door4.x + 150);
+					if (FlxG.save.data.downscroll)
+					{
+						door4.flipY = true;
+						door4.y = 0;
+					}
 					door4.visible = true;
 					door4.animation.play('fall');
 					new FlxTimer().start(0.3, function(e:FlxTimer)
@@ -4074,13 +4429,18 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		
+
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
 		{
-			if(FlxG.save.data.distractions){
+			if(FlxG.save.data.distractions)
+			{
 				lightningStrikeShit();
 			}
 		}
 	}
+
+	
 
 	var curLight:Int = 0;
 }

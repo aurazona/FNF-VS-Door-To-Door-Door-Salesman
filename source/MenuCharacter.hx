@@ -31,8 +31,8 @@ class MenuCharacter extends FlxSprite
 		'parents-christmas' => new CharacterSetting(100, 130, 1.8),
 		'senpai' => new CharacterSetting(-40, -45, 1.4),
 		'bastard' => new CharacterSetting (-15, 275, 1.65),
-		'week1' => new CharacterSetting(505, -55, 1.0, true),
-		'week2' => new CharacterSetting(505, -55, 1.0, true)
+		'week1' => new CharacterSetting(505, -51, 1.0, true),
+		'week2' => new CharacterSetting(505, -51, 1.0, true)
 	];
 
 	private var flipped:Bool = false;

@@ -16,7 +16,3 @@ Q: How did you do [insert feature here] or [insert other feature here]?
 
 A: We're open source, go find out for yourself!
 
-Q: Update when????
-
-A: Unless it's a bug fix or there's overwhelming demand for a new week, never™.
-

@@ -1,0 +1,26 @@
+VS D2DDS V1.1 CHANGELOG:
+
+SPOILER ALERT!!!! PLEASE PLAY THROUGH THE MOD FIRST TO AVOID SPOILERS FOR MECHANICS/SECRETS!!!
+
+GAME CHANGES:
++ Added week 2:
+
+	+Contains 3 new songs, Doorman, Doorkicker and Stage Exit.
+	+Doorman is based off of Tropical Resort zone act 1 from Sonic Colours, originally composed by Naofumi Hataya.
+	+Doorkicker is based off of Doomsday Zone from Sonic & Knuckles, originally composed by Tatsuyuki Maeda.
+	+Stage Exit is based off of Back to Back [Sonic Mix] from Sonic Rush, originally composed by Hideki Naganuma (the funkiest uncle).
+	+Contains more dialogue.
+	+Added a health drain mechanic for Doorkicker. D2DDS' notes will drain your health.
+	+Added a health limiting mechanic for Stage Exit. Doors will drop onto the healthbar periodically throughout the song, limiting your max health.
+
++ Added a sneaky lil warning screen for any HTML5 builds. You won't see these if you're reading this, as you're running a normal windows build. also it would've been cool for certain websites *cough* kbhgames *cough* to at least ask permission first, but eh.
++ Pressing 1 whilst in botplay removes the hud. Made for the trailer, but feel free to use it for your stuff too lol!
++ Added dynamic camera movement! The camera will (sorta) go in the direction your arrows hit!
+
+= Fixed a couple inconsistencies with D2DDS' sprites.
+
+-Removed the debug console that launched with the game.
+
+FILE CHANGES:
++ Added the OST for the mod. Has 9 tracks!
++ Added a COOL PEOPLE doc, where the COOLEST OF PEOPLE reside.

@@ -1,6 +1,7 @@
 bf
 dad
 bf-dad
+bf-bastard
 gf
 spooky
 pico
@@ -18,3 +19,4 @@ senpai-angry
 spirit
 bastard
 bastardns
+sticky

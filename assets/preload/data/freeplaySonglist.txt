@@ -4,3 +4,5 @@ Ajar:bastardns:1
 Doorman:bastard:1
 Doorkicker:bastard:1
 Stage Exit:bastard:1
+Stick jar:bastard:1
+Infinidoor:bastard:1

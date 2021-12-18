@@ -28,6 +28,8 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf-pixel-dead';
 			case 'bf-dad':
 				daBf = 'bf-dad';
+			case 'bf-bastard':
+				daBf = 'bf-bastard';
 			default:
 				daBf = 'bf';
 		}

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="sticky.png">
+	<!-- Created with Adobe Animate version 16.0.1.119 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="stickdown0000" x="0" y="0" width="500" height="500" frameX="0" frameY="0" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0001" x="0" y="0" width="500" height="500" frameX="0" frameY="0" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0002" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0003" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0004" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0005" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0006" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0007" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickdown0008" x="500" y="0" width="500" height="500" frameX="-1" frameY="-1" frameWidth="501" frameHeight="501"/>
+	<SubTexture name="stickidle0000" x="1000" y="0" width="500" height="500"/>
+	<SubTexture name="stickidle0001" x="1000" y="0" width="500" height="500"/>
+	<SubTexture name="stickidle0002" x="1500" y="0" width="500" height="500"/>
+	<SubTexture name="stickidle0003" x="1500" y="0" width="500" height="500"/>
+	<SubTexture name="stickidle0004" x="0" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0005" x="0" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0006" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0007" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0008" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0009" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0010" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0011" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0012" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0013" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0014" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0015" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0016" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0017" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickidle0018" x="500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0000" x="1000" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0001" x="1000" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0002" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0003" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0004" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0005" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0006" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0007" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0008" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0009" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0010" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0011" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0012" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickleft0013" x="1500" y="500" width="500" height="500"/>
+	<SubTexture name="stickright0000" x="0" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0001" x="0" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0002" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0003" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0004" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0005" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0006" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0007" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0008" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0009" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0010" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0011" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0012" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickright0013" x="500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0000" x="1000" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0001" x="1000" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0002" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0003" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0004" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0005" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0006" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0007" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0008" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0009" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0010" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0011" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0012" x="1500" y="1000" width="500" height="500"/>
+	<SubTexture name="stickup0013" x="1500" y="1000" width="500" height="500"/>
+</TextureAtlas>
